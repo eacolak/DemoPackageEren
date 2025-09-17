@@ -57,29 +57,29 @@ class OptionFalse(Param):
 
 
 
-class Example1(Param):
-    name: Literal["Example1"] = "Example1"
+class Example2(Param):
+    name: Literal["Example2"] = "Example2"
     value: float
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
 
     class Config:
-        title = "Example1"
+        title = "Example2"
 
 
 
-class ConfigParam2(Param):
+class ConfigParam4(Param):
     name: Literal["ConfigParam2"] = "ConfigParam2"
     value: Union[OptionTrue, OptionFalse]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
     class Config:
-        title = "Param2"
+        title = "Param4"
 
 
 
-class ConfigParam1(Param):
+class ConfigParam3(Param):
     name: Literal["ConfigParam1"] = "ConfigParam1"
     example: Example1
     value: Literal["ConfigParam1"] = "ConfigParam1"
@@ -87,7 +87,7 @@ class ConfigParam1(Param):
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Param1"
+        title = "Param3"
 
 
 class Params(Param):
@@ -95,12 +95,12 @@ class Params(Param):
         Positive angles specify counterclockwise rotation while negative angles indicate clockwise rotation.
     """
     name: Literal["Params"] = "Params"
-    value: Union[ConfigParam1, ConfigParam2]
+    value: Union[ConfigParam3, ConfigParam4]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
-        title = "Params"
+        title = "Params2"
 
 
 
@@ -136,7 +136,7 @@ class DemoPackageErenExecutor2(Config):
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Package"
+        title = "Package2"
         json_schema_extra = {
             "target": {
                 "value": 0
@@ -244,7 +244,7 @@ class DemoPackageErenExecutor1(Config):
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Package"
+        title = "Package1"
         json_schema_extra = {
             "target": {
                 "value": 0
