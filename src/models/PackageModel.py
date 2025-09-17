@@ -148,12 +148,15 @@ class DemoPackageErenExecutor1(Config):
 
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[DemoPackageErenExecutor1, DemoPackageErenExecutor2]
+    value: Union[DemoPackageErenExecutor1]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
         title = "Task"
+        json_schema_extra = {
+            "target": "value"
+        }
 
 
 class PackageConfigs(Configs):
