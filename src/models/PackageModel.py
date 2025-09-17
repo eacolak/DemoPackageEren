@@ -38,7 +38,7 @@ class OutputImage(Output):
         title = "Image"
 
 
-class OptionTrue(Param):
+class OptionTrue(Config):
     name: Literal["OptionTrue"] = "OptionTrue"
     value: Literal[True] = True
     type: Literal["bool"] = "bool"
@@ -47,7 +47,7 @@ class OptionTrue(Param):
     class Config:
         title = "OptionTrue"
 
-class OptionFalse(Param):
+class OptionFalse(Config):
     name: Literal["OptionFalse"] = "OptionFalse"
     value: Literal[False] = False
     type: Literal["bool"] = "bool"
@@ -58,7 +58,7 @@ class OptionFalse(Param):
 
 
 
-class Example1(Param):
+class Example1(Config):
     name: Literal["Example1"] = "Example1"
     value: float
     type: Literal["number"] = "number"
@@ -69,7 +69,7 @@ class Example1(Param):
 
 
 
-class ConfigParam2(Param):
+class ConfigParam2(Config):
     name: Literal["ConfigParam2"] = "ConfigParam2"
     value: Union[OptionTrue, OptionFalse]
     type: Literal["object"] = "object"
@@ -80,7 +80,7 @@ class ConfigParam2(Param):
 
 
 
-class ConfigParam1(Param):
+class ConfigParam1(Config):
     name: Literal["ConfigParam1"] = "ConfigParam1"
     example: Example1
     value: Literal["ConfigParam1"] = "ConfigParam1"
