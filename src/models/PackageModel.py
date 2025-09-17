@@ -1,7 +1,7 @@
 
 from pydantic import Field, validator
 from typing import List, Optional, Union, Literal
-from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config
+from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config, Param
 
 
 class InputImage(Input):
@@ -38,7 +38,7 @@ class OutputImage(Output):
         title = "Image"
 
 
-class OptionTrue(Config):
+class OptionTrue(Param):
     name: Literal["OptionTrue"] = "OptionTrue"
     value: Literal[True] = True
     type: Literal["bool"] = "bool"
@@ -47,7 +47,7 @@ class OptionTrue(Config):
     class Config:
         title = "OptionTrue"
 
-class OptionFalse(Config):
+class OptionFalse(Param):
     name: Literal["OptionFalse"] = "OptionFalse"
     value: Literal[False] = False
     type: Literal["bool"] = "bool"
@@ -58,7 +58,7 @@ class OptionFalse(Config):
 
 
 
-class Example1(Config):
+class Example1(Param):
     name: Literal["Example1"] = "Example1"
     value: float
     type: Literal["number"] = "number"
@@ -69,7 +69,7 @@ class Example1(Config):
 
 
 
-class ConfigParam2(Config):
+class ConfigParam2(Param):
     name: Literal["ConfigParam2"] = "ConfigParam2"
     value: Union[OptionTrue, OptionFalse]
     type: Literal["object"] = "object"
@@ -80,7 +80,7 @@ class ConfigParam2(Config):
 
 
 
-class ConfigParam1(Config):
+class ConfigParam1(Param):
     name: Literal["ConfigParam1"] = "ConfigParam1"
     example: Example1
     value: Literal["ConfigParam1"] = "ConfigParam1"
@@ -91,7 +91,7 @@ class ConfigParam1(Config):
         title = "Param1"
 
 
-class Params(Config):
+class Params(Param):
     """
         Positive angles specify counterclockwise rotation while negative angles indicate clockwise rotation.
     """
