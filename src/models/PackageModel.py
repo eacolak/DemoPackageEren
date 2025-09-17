@@ -37,7 +37,7 @@ class OutputImage(Output):
     class Config:
         title = "Image"
 
-class OptionTrue(Param):
+class OptionTrue2(Param):
     name: Literal["OptionTrue"] = "OptionTrue"
     value: Literal[True] = True
     type: Literal["bool"] = "bool"
@@ -46,7 +46,7 @@ class OptionTrue(Param):
     class Config:
         title = "OptionTrue"
 
-class OptionFalse(Param):
+class OptionFalse2(Param):
     name: Literal["OptionFalse"] = "OptionFalse"
     value: Literal[False] = False
     type: Literal["bool"] = "bool"
@@ -70,7 +70,7 @@ class Example2(Param):
 
 class ConfigParam4(Param):
     name: Literal["ConfigParam2"] = "ConfigParam2"
-    value: Union[OptionTrue, OptionFalse]
+    value: Union[OptionTrue2, OptionFalse2]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
@@ -90,11 +90,11 @@ class ConfigParam3(Param):
         title = "Param3"
 
 
-class Params(Param):
+class Params2(Param):
     """
         Positive angles specify counterclockwise rotation while negative angles indicate clockwise rotation.
     """
-    name: Literal["Params"] = "Params"
+    name: Literal["Params2"] = "Params2"
     value: Union[ConfigParam3, ConfigParam4]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
@@ -109,7 +109,7 @@ class DemoPackageErenInputs2(Inputs):
     inputImage2: InputImage
 
 class DemoPackageErenConfigs2(Configs):
-    params: Params
+    params: Params2
 
 
 class DemoPackageErenOutputs2(Outputs):
@@ -143,6 +143,7 @@ class DemoPackageErenExecutor2(Config):
                 "value": 0
             }
         }
+
 
 
 class OptionTrue(Param):
