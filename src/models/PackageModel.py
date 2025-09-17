@@ -106,7 +106,7 @@ class Params(Param):
 
 class DemoPackageErenInputs2(Inputs):
     inputImage: InputImage
-
+    inputImage2: InputImage
 
 class DemoPackageErenConfigs2(Configs):
     params: Params
@@ -114,6 +114,7 @@ class DemoPackageErenConfigs2(Configs):
 
 class DemoPackageErenOutputs2(Outputs):
     outputImage: OutputImage
+    outputImage2: OutputImage
 
 
 class DemoPackageErenRequest2(Request):
