@@ -38,69 +38,88 @@ class OutputImage(Output):
         title = "Image"
 
 
-class KeepSideFalse(Config):
-    name: Literal["False"] = "False"
-    value: Literal[False] = False
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Disable"
-
-
-class KeepSideTrue(Config):
-    name: Literal["True"] = "True"
+class OptionTrue(Param):
+    name: Literal["OptionTrue"] = "OptionTrue"
     value: Literal[True] = True
     type: Literal["bool"] = "bool"
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Enable"
+        title = "OptionTrue"
+
+class OptionFalse(Param):
+    name: Literal["OptionFalse"] = "OptionFalse"
+    value: Literal[False] = False
+    type: Literal["bool"] = "bool"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "OptionFalse"
 
 
-class KeepSideBBox(Config):
-    """
-        Rotate image without catting off sides.
-    """
-    name: Literal["KeepSide"] = "KeepSide"
-    value: Union[KeepSideTrue, KeepSideFalse]
+
+class Example1(Param):
+    name: Literal["Example1"] = "Example1"
+    value: float
+    type: Literal["number"] = "number"
+    field: Literal["textInput"] = "textInput"
+
+    class Config:
+        title = "Example1"
+
+
+
+class ConfigParam2(Param):
+    name: Literal["ConfigParam2"] = "ConfigParam2"
+    value: Union[OptionTrue, OptionFalse]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
     class Config:
-        title = "Keep Sides"
+        title = "Param2"
 
 
-class Degree(Config):
+
+class ConfigParam1(Param):
+    name: Literal["ConfigParam1"] = "ConfigParam1"
+    example: Example1
+    value: Literal["ConfigParam1"] = "ConfigParam1"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Param1"
+
+
+class Params(Config):
     """
         Positive angles specify counterclockwise rotation while negative angles indicate clockwise rotation.
     """
-    name: Literal["Degree"] = "Degree"
-    value: int = Field(ge=-359.0, le=359.0,default=0)
-    type: Literal["number"] = "number"
-    field: Literal["textInput"] = "textInput"
-    placeHolder: Literal["[-359, 359]"] = "[-359, 359]"
+    name: Literal["Params"] = "Params"
+    value: Union[ConfigParam1, ConfigParam2]
+    type: Literal["object"] = "object"
+    field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
-        title = "Angle"
+        title = "Params"
 
 
-class PackageInputs(Inputs):
+
+class DemoPackageErenInputs(Inputs):
     inputImage: InputImage
 
 
-class PackageConfigs(Configs):
-    degree: Degree
-    drawBBox: KeepSideBBox
+class DemoPackageErenConfigs(Configs):
+    params: Params
 
 
-class PackageOutputs(Outputs):
+class DemoPackageErenOutputs(Outputs):
     outputImage: OutputImage
 
 
-class PackageRequest(Request):
-    inputs: Optional[PackageInputs]
-    configs: PackageConfigs
+class DemoPackageErenRequest(Request):
+    inputs: Optional[DemoPackageErenInputs]
+    configs: DemoPackageErenConfigs
 
     class Config:
         json_schema_extra = {
@@ -108,13 +127,13 @@ class PackageRequest(Request):
         }
 
 
-class PackageResponse(Response):
-    outputs: PackageOutputs
+class DemoPackageErenResponse(Response):
+    outputs: DemoPackageErenOutputs
 
 
-class PackageExecutor(Config):
-    name: Literal["Package"] = "Package"
-    value: Union[PackageRequest, PackageResponse]
+class DemoPackageErenExecutor1(Config):
+    name: Literal["DemoPackageEX1"] = "DemoPackageEX1"
+    value: Union[DemoPackageErenRequest, DemoPackageErenResponse]
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
@@ -129,15 +148,12 @@ class PackageExecutor(Config):
 
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[PackageExecutor]
+    value: Union[DemoPackageErenExecutor1, DemoPackageErenExecutor2]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
         title = "Task"
-        json_schema_extra = {
-            "target": "value"
-        }
 
 
 class PackageConfigs(Configs):
