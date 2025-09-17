@@ -81,7 +81,7 @@ class ConfigParam4(Param):
 
 class ConfigParam3(Param):
     name: Literal["ConfigParam1"] = "ConfigParam1"
-    example: Example1
+    example: Example2
     value: Literal["ConfigParam1"] = "ConfigParam1"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
