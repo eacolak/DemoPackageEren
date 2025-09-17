@@ -20,6 +20,21 @@ class InputImage(Input):
     class Config:
         title = "Image"
 
+class InputImage2(Input):
+    name: Literal["inputImage2"] = "inputImage2"
+    value: Union[List[Image], Image]
+    type: str = "object"
+
+    @validator("type", pre=True, always=True)
+    def set_type_based_on_value(cls, value, values):
+        value = values.get('value')
+        if isinstance(value, Image):
+            return "object"
+        elif isinstance(value, list):
+            return "list"
+
+    class Config:
+        title = "Image"
 
 class OutputImage(Output):
     name: Literal["outputImage"] = "outputImage"
@@ -106,7 +121,7 @@ class Params2(Param):
 
 class DemoPackageErenInputs2(Inputs):
     inputImage: InputImage
-    inputImage2: InputImage
+    inputImage2: InputImage2
 
 class DemoPackageErenConfigs2(Configs):
     params: Params2
