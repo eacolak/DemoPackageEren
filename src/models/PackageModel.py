@@ -37,6 +37,112 @@ class OutputImage(Output):
     class Config:
         title = "Image"
 
+class OptionTrue(Param):
+    name: Literal["OptionTrue"] = "OptionTrue"
+    value: Literal[True] = True
+    type: Literal["bool"] = "bool"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "OptionTrue"
+
+class OptionFalse(Param):
+    name: Literal["OptionFalse"] = "OptionFalse"
+    value: Literal[False] = False
+    type: Literal["bool"] = "bool"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "OptionFalse"
+
+
+
+class Example1(Param):
+    name: Literal["Example1"] = "Example1"
+    value: float
+    type: Literal["number"] = "number"
+    field: Literal["textInput"] = "textInput"
+
+    class Config:
+        title = "Example1"
+
+
+
+class ConfigParam2(Param):
+    name: Literal["ConfigParam2"] = "ConfigParam2"
+    value: Union[OptionTrue, OptionFalse]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
+
+    class Config:
+        title = "Param2"
+
+
+
+class ConfigParam1(Param):
+    name: Literal["ConfigParam1"] = "ConfigParam1"
+    example: Example1
+    value: Literal["ConfigParam1"] = "ConfigParam1"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Param1"
+
+
+class Params(Param):
+    """
+        Positive angles specify counterclockwise rotation while negative angles indicate clockwise rotation.
+    """
+    name: Literal["Params"] = "Params"
+    value: Union[ConfigParam1, ConfigParam2]
+    type: Literal["object"] = "object"
+    field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
+
+    class Config:
+        title = "Params"
+
+
+
+class DemoPackageErenInputs2(Inputs):
+    inputImage: InputImage
+
+
+class DemoPackageErenConfigs2(Configs):
+    params: Params
+
+
+class DemoPackageErenOutputs2(Outputs):
+    outputImage: OutputImage
+
+
+class DemoPackageErenRequest2(Request):
+    inputs: Optional[DemoPackageErenInputs2]
+    configs: DemoPackageErenConfigs2
+
+    class Config:
+        json_schema_extra = {
+            "target": "configs"
+        }
+
+
+class DemoPackageErenResponse2(Response):
+    outputs: DemoPackageErenOutputs2
+
+class DemoPackageErenExecutor2(Config):
+    name: Literal["DemoPackageEX2"] = "DemoPackageEX2"
+    value: Union[DemoPackageErenRequest2, DemoPackageErenResponse2]
+    type: Literal["object"] = "object"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Package"
+        json_schema_extra = {
+            "target": {
+                "value": 0
+            }
+        }
+
 
 class OptionTrue(Param):
     name: Literal["OptionTrue"] = "OptionTrue"
@@ -148,16 +254,12 @@ class DemoPackageErenExecutor1(Config):
 
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[DemoPackageErenExecutor1]
+    value: Union[DemoPackageErenExecutor1, DemoPackageErenExecutor2]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
         title = "Task"
-        json_schema_extra = {
-            "target": "value"
-        }
-
 
 class PackageConfigs(Configs):
     executor: ConfigExecutor
